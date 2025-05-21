@@ -1,0 +1,1 @@
+let rateLimit=require("express-rate-limit");function api_limiter(){rateLimit({windowMs:1e3,max:1,standardHeaders:!0,legacyHeaders:!1,message:"Too many accounts created from this IP"})}module.exports={api_limiter:api_limiter};// build date : 2025. 5. 21. 오후 7:06:44

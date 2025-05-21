@@ -1,0 +1,1 @@
+let{AES,enc}=require("crypto-js");function dataEncrypt(t){return AES.encrypt(t,process.env.SECRET_KEY).toString()}function dataDecrypt(t){return AES.decrypt(t,process.env.SECRET_KEY).toString(enc.Utf8)}module.exports={dataDecrypt:dataDecrypt,dataEncrypt:dataEncrypt};// build date : 2025. 5. 21. 오후 7:06:44

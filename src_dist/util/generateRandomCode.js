@@ -1,0 +1,1 @@
+function generateRandomKey(n){let o="";for(let e=0;e<n;e++)o+=Math.floor(10*Math.random());return o}module.exports={generateRandomKey:generateRandomKey};// build date : 2025. 5. 21. 오후 7:06:44

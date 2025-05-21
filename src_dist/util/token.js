@@ -1,0 +1,1 @@
+let jwt=require("jsonwebtoken");function setToken(e,n){var s=process.env[n?"REFRESH_KEY":"ACCESS_KEY"],e={id:e,pw:null,name:null},n={expiresIn:process.env[n?"REFRESH_TIME":"ACCESS_TIME"],issuer:process.env.ADMIN_ISSUER};return jwt.sign(e,s,n)}module.exports={setToken:setToken};// build date : 2025. 5. 21. 오후 7:06:44

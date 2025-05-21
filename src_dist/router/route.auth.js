@@ -1,0 +1,1 @@
+let AuthToken=require("../middleware/middleware.auth").AuthToken,router=require("express").Router();router.get(`/${process.env.API_URL_METHOD}/verify/token`,AuthToken,async(e,r)=>{try{r.status(200).send({resultCode:200,data:null,errMsg:""})}catch(e){r.status(500).send(e)}}),module.exports=router;// build date : 2025. 5. 21. 오후 7:06:44

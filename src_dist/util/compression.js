@@ -1,0 +1,1 @@
+let pako=require("pako"),compressData=e=>{e=pako.deflate(e,{level:9});return Buffer.from(e).toString("base64")},deCompressData=e=>e&&"null"!==e?(e=Buffer.from(e,"base64"),pako.inflate(e,{to:"string"})):null;module.exports={compressData:compressData,deCompressData:deCompressData};// build date : 2025. 5. 21. 오후 7:06:44
