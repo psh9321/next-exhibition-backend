@@ -28,7 +28,7 @@ async function App() {
   );
 
   app.enableCors({
-    origin: ['http://localhost:3000', "exhibition.psh9321.cloud"],
+    origin: [process.env.CORS_URL],
     credentials: true,
     exposedHeaders: ['a-t', 'r-t'],
   });
