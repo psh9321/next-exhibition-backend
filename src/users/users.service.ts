@@ -56,7 +56,7 @@ export class UsersService {
 
         const newUser_id = newUser._id.toString();
 
-        const rootDirectory = path.join(__dirname, "../../", process.env.FILE_DIRECTORY_NAME as string);
+        const rootDirectory = path.join(process.cwd(), process.env.FILE_DIRECTORY_NAME as string);
     
         fs.mkdirSync(path.join(rootDirectory, newUser_id), {
           recursive : true
