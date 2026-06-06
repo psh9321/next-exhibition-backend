@@ -113,7 +113,7 @@ export class UsersService {
       if(!result) return null;
 
       if(!data.updateIsProfileImg) {
-        const rootDirectory = path.join(__dirname, "../../", process.env.FILE_DIRECTORY_NAME as string);
+        const rootDirectory = path.join(process.cwd(), process.env.FILE_DIRECTORY_NAME as string);
 
         const resultPath = path.join(rootDirectory, _id);
 
@@ -139,7 +139,7 @@ export class UsersService {
     try {
       if(!file) throw new BadRequestException("프로필 이미지가 누락됐습니다.");
 
-      const rootDirectory = path.join(__dirname, "../../", process.env.FILE_DIRECTORY_NAME as string);
+      const rootDirectory = path.join(process.cwd(), process.env.FILE_DIRECTORY_NAME as string);
 
       const resultPath = path.join(rootDirectory, _id);
 
