@@ -6,7 +6,7 @@ import { UsersSchema } from './schema/user.schema';
 
 import { UsersService } from './users.service';
 import { AuthService } from '@/auth/auth.service';
-import { FavoriteExhibitionSchema } from '@/favorite/schema/favorite.schema';
+import { FavoriteCultureInfoSchema } from '@/favorite/schema/favorite.schema';
 import { ReviewSchema } from '@/review/schema/review.schema';
 import { AuthMiddleware } from '@/shared/middleware/auth.middleware';
 
@@ -18,8 +18,8 @@ import { AuthMiddleware } from '@/shared/middleware/auth.middleware';
         schema: SchemaFactory.createForClass(UsersSchema),
       },
       {
-        name : FavoriteExhibitionSchema.name,
-        schema : SchemaFactory.createForClass(FavoriteExhibitionSchema)
+        name : FavoriteCultureInfoSchema.name,
+        schema : SchemaFactory.createForClass(FavoriteCultureInfoSchema)
       },
       {
         name : ReviewSchema.name,

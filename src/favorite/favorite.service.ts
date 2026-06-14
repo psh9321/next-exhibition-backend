@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 
-import { FavoriteExhibitionSchema } from './schema/favorite.schema';
+import { FavoriteCultureInfoSchema } from './schema/favorite.schema';
 import { FavoriteListQueryDto } from './dto/favorite.list.dto';
 import { FavoriteToggleDto } from './dto/favorite.toggle.dto';
 
@@ -11,7 +11,7 @@ import { FavoriteToggleDto } from './dto/favorite.toggle.dto';
 @Injectable()
 export class FavoriteService {
   constructor(
-    @InjectModel(FavoriteExhibitionSchema.name)
+    @InjectModel(FavoriteCultureInfoSchema.name)
     private readonly favoriteModel : Model<FAVORITE_EXHIBITION_MODEL>,
   ) {}
 

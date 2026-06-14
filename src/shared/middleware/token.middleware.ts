@@ -30,7 +30,7 @@ export class TokenMiddleware implements NestMiddleware {
       if (!refreshPayload?.userId) return next();
 
       res.setHeader('a-t', this.authService.CreateToken('accessToken', refreshPayload.userId));
-      res.setHeader('r-t', this.authService.CreateToken('refreshToken', refreshPayload.userId));
+      res.setHeader('r-t', token["r-t"] as string);
 
       req._id = refreshPayload.userId;
       next();

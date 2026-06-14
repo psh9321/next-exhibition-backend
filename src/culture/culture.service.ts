@@ -2,23 +2,23 @@ import { Injectable } from '@nestjs/common';
 // import { CreateExhibitionDto } from './dto/create-exhibition.dto';
 // import { UpdateExhibitionDto } from './dto/update-exhibition.dto';
 
-import { OPEN_API } from 'src/shared/api/instance';
-import { ExhibitionListQueryDto } from './dto/exihibition.list.dto';
+import { KAKAO_API, OPEN_API } from 'src/shared/api/instance';
+import { CultureInfoListQueryDto } from './dto/culture.info.list.dto';
 
-import { XmlToJson } from '@/exhibition/util/xmlToJson';
+import { XmlToJson } from '@/culture/util/xmlToJson';
 import { InjectModel } from '@nestjs/mongoose';
-import { FavoriteExhibitionSchema } from '../favorite/schema/favorite.schema';
+import { FavoriteCultureInfoSchema } from '../favorite/schema/favorite.schema';
 import { Model } from 'mongoose';
+import { CultureInfoListMapDto } from './dto/culture.info.list.map.dto';
 
 @Injectable()
-export class ExhibitionService {
+export class CultureService {
   constructor(
-    @InjectModel(FavoriteExhibitionSchema.name)
+    @InjectModel(FavoriteCultureInfoSchema.name)
     private readonly favoriteModel : Model<FAVORITE_EXHIBITION_MODEL>
   ){}
 
-  async GetOpenApiData(query : ExhibitionListQueryDto) {
-
+  async GetCultureInfoList(query : CultureInfoListQueryDto) {
     try {
 
       const { keyword, area, offset, limit, type } = query;
@@ -69,7 +69,7 @@ export class ExhibitionService {
     }
   }
 
-  async GetOpenApiDetailData(seq : string, favoriterId?: string) {
+  async GetCultureInfoDetail(seq : string, favoriterId?: string) {
     try {
         const xmlStr = await OPEN_API("detail2", {
             searchParams : { seq }   
@@ -103,7 +103,7 @@ export class ExhibitionService {
     }
   }
 
-  async ExhibitionPopular() {
+  async CultureInfoPopular() {
     try {
       const popularExhibitions = await this.favoriteModel.aggregate([
         {
@@ -144,6 +144,66 @@ export class ExhibitionService {
     }
     catch(err) {
       throw err
+    }
+  }
+
+
+  async CultureInfoListMap(query : CultureInfoListMapDto) {
+    try { 
+
+      const { offset, limit, gpsxfrom, gpsyfrom, gpsxto, gpsyto } = query;
+
+      // const [ addressInfo, xmlStr ] = await Promise.all([
+      //   KAKAO_API("geo/coord2address.json", {
+      //     searchParams : {
+      //       x : gpsxfrom,
+      //       y : gpsyfrom
+      //     }
+      //   }).json<API_SERVER_ADDRESS>(),
+      //   OPEN_API("area2", {
+      //     searchParams : { 
+      //       gpsxfrom, gpsyfrom, gpsxto, gpsyto,
+      //       PageNo : offset,
+      //       numOfrows : limit,
+      //     },
+      //   })
+      //   .text()
+      // ])
+
+      const xmlStr = await OPEN_API("area2", {
+          searchParams : { 
+            gpsxfrom, gpsyfrom, gpsxto, gpsyto,
+            PageNo : offset,
+            numOfrows : limit,
+          },
+        })
+        .text()
+
+      // const { region_1depth_name, region_2depth_name, region_3depth_name } = addressInfo.documents[0].address;
+
+      const jsonData = XmlToJson(xmlStr);
+      
+      const openApiData = jsonData["response"]["body"] as OPEN_API_SERVER_RESPONSE_DATA;
+
+      const { totalCount } = openApiData;
+
+      const total = Number(totalCount??0);
+
+      const isNextPage = offset < Math.floor(total/query.limit);
+      
+      const result = {
+        // address : `${region_1depth_name} ${region_2depth_name} ${region_3depth_name}`,
+        total,
+        isNextPage,
+        page : offset,
+        limit : limit,
+        list : Array.isArray(openApiData["items"]["item"]) ? openApiData["items"]["item"] : []
+      }
+
+      return result
+    }
+    catch(err) {
+      throw err;
     }
   }
 }

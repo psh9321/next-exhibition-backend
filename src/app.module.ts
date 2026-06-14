@@ -1,7 +1,7 @@
 import { Controller, Get, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import dotenv from 'dotenv';
-import { ExhibitionModule } from './exhibition/exhibition.module';
+import { ExhibitionModule } from './culture/culture.module';
 import { UsersModule } from './users/users.module';
 import { FavoriteModule } from './favorite/favorite.module';
 import { ReviewModule } from './review/review.module';

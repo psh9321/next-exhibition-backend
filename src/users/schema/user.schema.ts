@@ -16,4 +16,7 @@ export class UsersSchema {
 
   @Prop({ default : false })
   isProfileImg : boolean;
+
+  @Prop()
+  profileImg : string;
 }

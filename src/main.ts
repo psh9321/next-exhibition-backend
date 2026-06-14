@@ -40,6 +40,6 @@ async function App() {
   const port = Number(process.env.PORT);
 
   await app.listen(port);
-  console.log('connect', port);
+  console.log('connect', port, process.cwd());
 }
 App();

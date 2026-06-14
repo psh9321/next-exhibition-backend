@@ -1,7 +1,7 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { ExhibitionService } from './exhibition.service';
-import { ExhibitionController } from './exhibition.controller';
-import { FavoriteExhibitionSchema } from '../favorite/schema/favorite.schema';
+import { CultureService } from './culture.service';
+import { CultureController } from './culture.controller';
+import { FavoriteCultureInfoSchema } from '../favorite/schema/favorite.schema';
 import { MongooseModule, SchemaFactory } from '@nestjs/mongoose';
 import { AuthService } from '@/auth/auth.service';
 import { TokenMiddleware } from '@/shared/middleware/token.middleware';
@@ -10,19 +10,19 @@ import { TokenMiddleware } from '@/shared/middleware/token.middleware';
   imports : [
     MongooseModule.forFeature([
       {
-        name : FavoriteExhibitionSchema.name,
-        schema : SchemaFactory.createForClass(FavoriteExhibitionSchema)
+        name : FavoriteCultureInfoSchema.name,
+        schema : SchemaFactory.createForClass(FavoriteCultureInfoSchema)
       }
     ])
   ],
-  controllers: [ExhibitionController],
-  providers: [ExhibitionService, AuthService],
-  exports: [ExhibitionService],
+  controllers: [CultureController],
+  providers: [CultureService, AuthService],
+  exports: [CultureService],
 })
 export class ExhibitionModule implements NestModule {
   configure(consumer : MiddlewareConsumer) {
     consumer 
     .apply(TokenMiddleware)
-    .forRoutes(ExhibitionController)
+    .forRoutes(CultureController)
   }
 }

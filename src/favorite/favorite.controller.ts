@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Param, Delete, Query, Req, Body } from '@nestjs/common';
 import type { Request } from 'express';
 import { FavoriteService } from './favorite.service';
-import { FavoriteListQueryDto } from './dto/favorite.list.dto';
 import { ApiError, ApiSuccess } from '@/shared/api/response';
 import { FavoriteToggleDto } from './dto/favorite.toggle.dto';
 

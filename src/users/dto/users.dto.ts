@@ -10,7 +10,10 @@ export class UsersDto {
 
     @IsNotEmpty({message : "socialType 값이 누락 됐습니다."})
     @IsEnum(USER_SOCIAL_TYPE_ENUM, { message : "socialType 값이 올바르지 않습니다." })
-    socialType : USER_SOCIAL_TYPE
+    socialType : USER_SOCIAL_TYPE;
+
+    @IsNotEmpty({message : "profileImg 값이 누락 됐습니다."})
+    profileImg : string
 }
 
 export class UserUpdateDto {

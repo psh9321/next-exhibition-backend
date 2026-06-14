@@ -3,7 +3,7 @@ import { IsOptional, IsNotEmpty, IsEnum, IsString } from 'class-validator';
 import { SERVICE_TYPE_ENUM } from '../types/open.api.enum';
 import { ListQueryDto } from '@/shared/dto/list.dto';
 
-export class ExhibitionListQueryDto extends ListQueryDto {
+export class CultureInfoListQueryDto extends ListQueryDto {
   @IsOptional()
   @IsNotEmpty({message : "type이 누락됐습니다."})
   @IsEnum(SERVICE_TYPE_ENUM, {message : "type 값이 올바르지 않습니다."})

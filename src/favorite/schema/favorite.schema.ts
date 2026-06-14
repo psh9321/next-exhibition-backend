@@ -2,10 +2,10 @@ import { Prop, Schema } from "@nestjs/mongoose";
 
 @Schema({
     timestamps : true,
-    collection : "FavoriteExhibition"
+    collection : "FavoriteCultureInfo"
 })
 
-export class FavoriteExhibitionSchema {
+export class FavoriteCultureInfoSchema {
   @Prop()
   favoriterId : string;
   

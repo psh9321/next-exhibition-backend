@@ -1,7 +1,7 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { MongooseModule, SchemaFactory } from '@nestjs/mongoose';
 
-import { FavoriteExhibitionSchema } from '../favorite/schema/favorite.schema';
+import { FavoriteCultureInfoSchema } from '../favorite/schema/favorite.schema';
 import { AuthMiddleware } from '../shared/middleware/auth.middleware';
 
 import { FavoriteService } from './favorite.service';
@@ -12,8 +12,8 @@ import { AuthService } from '@/auth/auth.service';
   imports : [
     MongooseModule.forFeature([
       {
-        name : FavoriteExhibitionSchema.name,
-        schema : SchemaFactory.createForClass(FavoriteExhibitionSchema)
+        name : FavoriteCultureInfoSchema.name,
+        schema : SchemaFactory.createForClass(FavoriteCultureInfoSchema)
       }
     ])
   ],

@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { UsersSchema } from './schema/user.schema';
 import { Model } from 'mongoose';
 import { UsersDto, UserUpdateDto } from './dto/users.dto';
-import { FavoriteExhibitionSchema } from '@/favorite/schema/favorite.schema';
+import { FavoriteCultureInfoSchema } from '@/favorite/schema/favorite.schema';
 
 import { ReviewSchema } from '@/review/schema/review.schema';
 
@@ -18,7 +18,7 @@ export class UsersService {
     @InjectModel(UsersSchema.name)
     private readonly userModel : Model<USER_MODEL>,
 
-    @InjectModel(FavoriteExhibitionSchema.name)
+    @InjectModel(FavoriteCultureInfoSchema.name)
     private readonly favoriteModel : Model<FAVORITE_EXHIBITION_MODEL>,
 
     @InjectModel(ReviewSchema.name)
@@ -40,10 +40,14 @@ export class UsersService {
       }
 
       if(userInfo) {
+
+        if(userInfo.profileImg !== param.profileImg) await userInfo.updateOne({ profileImg : param.profileImg });
+
         result["createdAt"] = userInfo?.get("createdAt");
         result["id"] = userInfo?._id.toString();
         result["isProfileImg"] = userInfo?.isProfileImg;
         result["name"] = userInfo?.name;
+        result["profileImg"] = userInfo?.profileImg;
         
         return result;
       }

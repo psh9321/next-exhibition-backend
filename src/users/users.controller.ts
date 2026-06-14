@@ -86,7 +86,7 @@ export class UsersController {
   ) {
     try {
       const result = await this.usersService.UserProfile(req._id as string, file);
-
+console.log(result)
       return new ApiSuccess(result);
     }
     catch(err) {
